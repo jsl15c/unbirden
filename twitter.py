@@ -1,7 +1,13 @@
+import json
 from TwitterSearch import TwitterSearch, TwitterSearchException, TwitterUserOrder
+from watson_developer_cloud import AlchemyLanguageV1
 
-def getTweets(place):
-    try:
+alchemy_language = AlchemyLanguageV1(api_key='a04bf0cda38fd380a2e89b9b54d6076729b568ce')
+
+
+# def getTweets(place):
+try:
+        place = raw_input("Enter a twitter handle to point of interest: ")
         tuo = TwitterUserOrder(place) # create a TwitterUserOrder
 
         # it's about time to create TwitterSearch object again
@@ -15,14 +21,16 @@ def getTweets(place):
 
         def my_callback_closure(current_ts_instance): # accepts ONE argument: an instance of TwitterSearch
             queries, tweets_seen = current_ts_instance.get_statistics()
-            if queries > 0 and (queries % 60) == 0: # trigger delay every 5th query
-                time.sleep(30) # sleep for 60 seconds
+            # if queries > 0 and (queries % 60) == 0: # trigger delay every 5th query
+            #     time.sleep(30) # sleep for 60 seconds
 
         tweetArray = []
         # start asking Twitter about the timeline
         for tweet in ts.search_tweets_iterable(tuo, callback=my_callback_closure):
-            tweetArray.append(tweet['text'])
-        return tweetArray
+            # tweetArray.append(tweet['text'])
+            # if 'accessible' in tweet['text']:
+                print tweet['text']
+                print(json.dumps(alchemy_language.emotion(text=tweet['text'], target="accessible", language='english'), indent=2))
 
-    except TwitterSearchException as e: # catch all those ugly errors
+except TwitterSearchException as e: # catch all those ugly errors
         print(e)
