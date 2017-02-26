@@ -1,6 +1,4 @@
-import json
 from TwitterSearch import TwitterSearch, TwitterSearchException, TwitterUserOrder
-from watson_developer_cloud import AlchemyLanguageV1
 
 def getTweets(place):
     try:
