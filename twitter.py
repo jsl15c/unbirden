@@ -30,7 +30,7 @@ try:
             # tweetArray.append(tweet['text'])
             # if 'accessible' in tweet['text']:
                 print tweet['text']
-                print(json.dumps(alchemy_language.emotion(text=tweet['text'], target="accessible", language='english'), indent=2))
+                print(json.dumps(alchemy_language.emotion(text=tweet['text'], language='english'), indent=2))
 
 except TwitterSearchException as e: # catch all those ugly errors
         print(e)
