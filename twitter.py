@@ -7,7 +7,7 @@ alchemy_language = AlchemyLanguageV1(api_key='a04bf0cda38fd380a2e89b9b54d6076729
 
 # def getTweets(place):
 try:
-        place = raw_input("Enter a twitter handle to point of interest: ")
+        place = raw_input("Enter a twitter handle: ")
         tuo = TwitterUserOrder(place) # create a TwitterUserOrder
 
         # it's about time to create TwitterSearch object again
